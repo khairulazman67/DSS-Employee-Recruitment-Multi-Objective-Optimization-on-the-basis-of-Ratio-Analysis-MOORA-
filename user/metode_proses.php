@@ -44,9 +44,6 @@
 </div>
 <!-- End of Page Content -->
 
-<!-- Footer -->
-<!-- End of Footer -->
-
 </div>
 <!-- End of Content Wrapper -->
 
@@ -57,130 +54,8 @@
 
 <?php
 if (isset($_POST['proses'])) { 
-  function IPK($nilaiIPK){
-    $outnilai = 0.00;
-
-    if($nilaiIPK<2 || $nilaiIPK >4){
-      $outnilai = 20;
-    }
-    elseif($nilaiIPK>= 2 && $nilaiIPK<=2.7){
-      $outnilai = 50;
-    }
-    elseif($nilaiIPK>=2.7 && $nilaiIPK<= 3){
-      $outnilai = 70;
-    }
-    elseif($nilaiIPK>3 && $nilaiIPK<=3.25){
-      $outnilai = 80;
-    }
-    elseif($nilaiIPK>=3.5 && $nilaiIPK<=4){
-      $outnilai = 100;
-    }else{
-      $outnilai =0;
-    }
-
-    return $outnilai;
-  };
-  // var_dump($outnilai);
-
-  function pengalaman($nilaiPel){
-    $nilaiPel = 7;
-    $outnilai = 0;
-    // print_r($kriteriaPengalaman[5][0]);
-    if($nilaiPel<=0){
-      $outnilai = 10;
-    }
-    elseif($nilaiPel> 0 && $nilaiPel<= 2){
-      $outnilai = 40;
-    }
-    elseif($nilaiPel> 2 && $nilaiPel<= 3){
-      $outnilai = 60;
-    }
-    elseif($nilaiPel> 3 && $nilaiPel<= 4){
-      $outnilai = 80;
-    }
-    elseif($nilaiPel> 4 ){
-      $outnilai = 100;
-    }else{
-      $outnilai =0;
-    }
-    return $outnilai;
-  }
-  // print_r($outnilaiPel);
-
-  function umur($nilaiUmur){
-    $outnilaiUmur = 0;
-    // print_r($kriteriaPengalaman[5][0]);
-    if($nilaiUmur<17 || $nilaiUmur >27){
-      $outnilaiUmur = 10;
-    }
-    elseif($nilaiUmur>= 17 && $nilaiUmur<=19){
-      $outnilaiUmur = 50;
-    }
-    elseif($nilaiUmur>=20 && $nilaiUmur<= 23){
-      $outnilaiUmur = 80;
-    }
-    elseif($nilaiUmur>23 && $nilaiUmur<=25){
-      $outnilaiUmur = 100;
-    }
-    elseif($nilaiUmur>=26 && $nilaiUmur<=27){
-      $outnilaiUmur = floatval($kriteriaPengalaman[2][2]);
-    }else{
-      $outnilaiUmur =0;
-    }
-    return $outnilaiUmur;
-  }
-  // print_r(umur(100));
-
-  function wawancara($nilaiwawancara){
-    $outnilaiWawancara = 0;
-    // print_r($kriteriaPengalaman[5][0]);
-    if($nilaiwawancara<10 || $nilaiwawancara > 100){
-      $outnilaiWawancara= 10;
-    }
-    elseif($nilaiwawancara>= 30 && $nilaiwawancara <= 60){
-      $outnilaiWawancara = 40;
-    }
-    elseif($nilaiwawancara >60 && $nilaiwawancara <= 80){
-      $outnilaiWawancara = 80;
-    }
-    elseif($nilaiwawancara>80 && $nilaiwawancara <= 100){
-      $outnilaiWawancara = 100;
-    }else{
-      $outnilaiWawancara =0;
-    }
-    return $outnilaiWawancara;
-  }
-
-  function psikotest($nilaipsikotes){
-    $outnilaiPsikotes = 0;
-    // print_r($kriteriaPengalaman[5][0]);
-    if($nilaipsikotes<10 || $nilaipsikotes > 100){
-      $outnilaiPsikotes= 10;
-    }
-    elseif($nilaipsikotes>= 10 && $nilaipsikotes <= 20){
-      $outnilaiPsikotes = 40;
-    }
-    elseif($nilaipsikotes >20 && $nilaipsikotes <= 40){
-      $outnilaiPsikotes = 80;
-    }
-    elseif($nilaipsikotes>40 && $nilaipsikotes <= 90){
-      $outnilaiPsikotes = 60;
-    }
-    elseif($nilaipsikotes>90 && $nilaipsikotes <= 100){
-      $outnilaiPsikotes = 100;
-    }
-    else{
-      $outnilaiPsikotes =0;
-    }
-    return $outnilaiPsikotes;
-  }
-  print_r('Psikotest '.psikotest(100).'<br>');
-  print_r('Wawancara '.wawancara(40).'<br>');
-  print_r('Pengalaman '.pengalaman(60).'<br>');
-  print_r('Umur '.umur(100).'<br>');
-  print_r('IPK '.IPK(4).'<br>');
-
-  
+  $sql_k_hasil_alternatif = "TRUNCATE TABLE hasil_alternatif";
+  $konek->query($sql_k_hasil_alternatif);
 
   $sql    = "SELECT * FROM data_calon_karyawan";
   $result = $konek->query($sql);
@@ -200,7 +75,7 @@ if (isset($_POST['proses'])) {
     );
   }
 
-  $query_k = $konek->query('SELECT * FROM moo_kriteria');
+  $query_k = $konek->query('SELECT * FROM data_kriteria');
   $id_kriteria = [];
   while ($row_k = $query_k->fetch_array(MYSQLI_ASSOC)) {
     $id_kriteria[] = $row_k['id'];
@@ -208,24 +83,130 @@ if (isset($_POST['proses'])) {
 
   foreach ($data_post as $key => $value) {
 
+    //Cek IPK
+    if($value['IPK']<2 || $value['IPK'] >4){
+      $outIPK = 20;
+    }
+    elseif($value['IPK'] >= 2 && $value['IPK']<2.7){
+      $outIPK = 50;
+    }
+    elseif($value['IPK']>=2.7 && $value['IPK']< 3){
+      $outIPK = 70;
+    }
+    elseif($value['IPK']>=3 && $value['IPK']<3.25){
+      $outIPK = 80;
+    }
+    elseif($value['IPK']>=3.25 && $value['IPK']<=4){
+      $outIPK = 100;
+    }else{
+      $outIPK =0;
+    }
+    
 
+    //Cek Pengalaman
+    if($value['pengalamanKerja']<=0){
+      $outPengalaman = 10;
+    }
+    elseif($value['pengalamanKerja']> 0 && $value['pengalamanKerja']<= 2){
+      $outPengalaman = 40;
+    }
+    elseif($value['pengalamanKerja']> 2 && $value['pengalamanKerja']<= 3){
+      $outPengalaman = 60;
+    }
+    elseif($value['pengalamanKerja'] > 3 && $value['pengalamanKerja']<= 4){
+      $outPengalaman = 80;
+    }
+    elseif($value['pengalamanKerja']> 4 ){
+      $outPengalaman = 100;
+    }else{
+      $outPengalaman =0;
+    }
+    
+    //Cek Umur
+    if($value['umur'] <17 || $value['umur'] >27){
+      $outUmur = 10;
+    }
+    elseif($value['umur'] >= 17 && $value['umur'] <=19){
+      $outUmur = 50;
+    }
+    elseif($value['umur'] >=20 && $value['umur'] <= 23){
+      $outUmur = 80;
+    }
+    elseif($value['umur'] >23 && $value['umur']<=25){
+      $outUmur = 100;
+    }
+    elseif($value['umur'] >=26 && $value['umur']<=27){
+      $outUmur = 60;
+    }else{
+      $outUmur =0;
+    }
+    
+
+    //Cek Nilai Psikotest
+    if($value['nilaiPsikotest'] <10 || $value['nilaiPsikotest'] > 100){
+      $outPsikotest= 10;
+    }
+    elseif($value['nilaiPsikotest'] >= 10 && $value['nilaiPsikotest'] <= 20){
+      $outPsikotest = 40;
+    }
+    elseif($value['nilaiPsikotest'] >20 && $value['nilaiPsikotest'] <= 40){
+      $outPsikotest = 80;
+    }
+    elseif($value['nilaiPsikotest'] >40 &&  $value['nilaiPsikotest'] <= 90){
+      $outPsikotest = 60;
+    }
+    elseif($value['nilaiPsikotest'] >90 && $value['nilaiPsikotest'] <= 100){
+      $outPsikotest = 100;
+    }
+    else{
+      $outPsikotest =0;
+    }
+    // print_r('Psikotest '.$outPsikotes.'<br>');
+
+    //Cek Nilai Wawancara
+    if($value['nilaiWawancara'] <10 || $value['nilaiWawancara'] > 100){
+      $outWawancara= 10;
+    }
+    elseif($value['nilaiWawancara'] >= 30 && $value['nilaiWawancara'] <= 60){
+      $outWawancara = 40;
+    }
+    elseif($value['nilaiWawancara'] >60 && $value['nilaiWawancara'] <= 80){
+      $outWawancara = 80;
+    }
+    elseif($value['nilaiWawancara'] >80 && $value['nilaiWawancara'] <= 100){
+      $outWawancara = 100;
+    }else{
+      $outWawancara =0;
+    }
+
+    print_r('Psikotest',$outPsikotes.'<br>');
+    print_r('Wawancara',$outWawancara.'<br>');
+    print_r('Pengalaman',$outPengalaman.'<br>');
+    print_r('Umur',$outUmur.'<br>');
+    print_r('IPK',$outIPK.'<br>');
+
+    // return
+    $outPsikotes = $outPsikotes/100;
+    $outWawancara = $outWawancara/100;
+    $outPengalaman = $outPengalaman/100;
+    $outUmur = $outUmur/100;
+    $outIPK = $outIPK/100;
+
+    $sql = "INSERT INTO hasil_alternatif (id_alternatif, id_calon, alternatif, IPK, umur, pengalamanKerja, nilaiPsikotest, nilaiWawancara) VALUES ('$value[id_alternatif]', '$value[id_calon]', '$value[alternatif]', '$outIPK', '$outUmur', '$outPengalaman', '$outPsikotest', '$outWawancara')";
+    $query = $konek->query($sql);
   }
 
-  $sql = 'SELECT * FROM data_calon_karyawan';
-  $result = $konek->query($sql);
-  //-- menyiapkan variable penampung berupa array
-  $kriteria=array();
-  //-- melakukan iterasi pengisian array untuk tiap record data yang didapat
-  foreach ($result as $row) {
-      $kriteria[$row['id']]=array($row['namacalon'],$row['kriteria'],$row['type'],$row['bobot']);
+  if ($query) {
+    echo "<script>alert('Berhasil !');</script>";
+    echo "<script>window.location.href = \"metode_proses.php\"</script>";
+  } else {
+    echo "<script>alert('Gagal !');</script>";
   }
 
 } else if (isset($_POST['kosongkan'])) {
 
-  $sql_k_moo_alternatif = "TRUNCATE TABLE moo_alternatif";
-  $konek->query($sql_k_moo_alternatif);
-  $sql_k_moo_nilai = "TRUNCATE TABLE moo_nilai";
-  $konek->query($sql_k_moo_nilai);
+  $sql_k_hasil_alternatif = "TRUNCATE TABLE hasil_alternatif";
+  $konek->query($sql_k_hasil_alternatif);
 
   echo "<script>alert('Berhasil mengosongkan tabel!')</script>";
   echo "<script>window.location.href = \"metode_proses.php\"</script>";

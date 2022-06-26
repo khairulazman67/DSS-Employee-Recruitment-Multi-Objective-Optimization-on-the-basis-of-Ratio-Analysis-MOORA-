@@ -67,7 +67,7 @@
                   <tbody>
                     <?php
 
-                      $query="SELECT * FROM moo_kriteria";
+                      $query="SELECT * FROM data_kriteria";
                       $result=$konek->query($query);
 
                       while ($row=$result->fetch_array(MYSQLI_ASSOC)) {

@@ -1,6 +1,6 @@
 <?php
-//-- query untuk mendapatkan semua data kriteria di tabel moo_kriteria
-$sql = 'SELECT * FROM moo_kriteria';
+//-- query untuk mendapatkan semua data kriteria di tabel data_kriteria
+$sql = 'SELECT * FROM data_kriteria';
 $result = $konek->query($sql);
 //-- menyiapkan variable penampung berupa array
 $kriteria=array();
@@ -9,8 +9,8 @@ foreach ($result as $row) {
     $kriteria[$row['id_kriteria']]=array($row['kode'],$row['kriteria'],$row['type'],$row['bobot']);
 }
 
-//-- query untuk mendapatkan semua data kriteria di tabel moo_alternatif
-$sql = 'SELECT * FROM moo_alternatif';
+//-- query untuk mendapatkan semua data kriteria di tabel hasil_alternatif
+$sql = 'SELECT * FROM hasil_alternatif';
 $result = $konek->query($sql);
 //-- menyiapkan variable penampung berupa array
 $alternatif=array();
@@ -53,7 +53,6 @@ for($i=0;$i<count($rowtocol);$i++ ){
 $normal = $alternatif;
 for($i=1;$i<=count($normal);$i++ ){
   $tmp = array();
-
   for($j=1;$j<=count($normal[$i]);$j++){
     $tmp[0]=$normal[$i][0];
     $tmp[$j] =($normal[$i][$j])/($hasilnilai[$j-1]);
@@ -61,7 +60,6 @@ for($i=1;$i<=count($normal);$i++ ){
   }
   $normal[$i]=$tmp;
 }
-
 $kriteria2 = array();
 foreach ($kriteria as $key => $value) {
   $kriteria2[$key]=$value[3];
@@ -77,7 +75,6 @@ for($i=1;$i<=count($optimal);$i++ ){
   }
   $optimal[$i]=$tmp;
 }
-
 //Perhitungan Min Max Yi
 $tipebobot = array();
 foreach ($kriteria as $key => $value) {
@@ -102,11 +99,17 @@ for($i=1;$i<=count($optimasi);$i++ ){
   $tmp[3]=$benefit-$cost;
   $optimasi[$i]=$tmp;
 }
-for ($i=0; $i <count($optimasi) ; $i++) { 
-  $optimasi[$i][3];
+$sql_k_hasil_alternatif = "TRUNCATE TABLE hasil_akhir";
+$konek->query($sql_k_hasil_alternatif);
+
+foreach ($optimasi as $key => $value) {
+  $sql = "INSERT INTO hasil_akhir (namaCalon, nilaiMax, nilaiMin, nilaiYi) VALUES ('$value[0]', '$value[1]', '$value[2]', '$value[3]')";
+    $query = $konek->query($sql);
 }
+
+
 // usort($optimasi,function($a,$b){return strnatcmp($b[3],$a[3]);});
-// print_r($optimasi);
+
 
 ?>
 
@@ -181,9 +184,12 @@ for ($i=0; $i <count($optimasi) ; $i++) {
               foreach ($normal as $key => $value) {
                 echo "<tr>";
                 echo "<td>".$alternatif[$key][0]."</td>";
-              for ($i=1; $i <= count($value) ; $i++) {
-                echo "<td>".$value[$i]."</td>";
-                }
+                echo "<td>".$value[1]."</td>";
+                echo "<td>".$value[2]."</td>";
+                echo "<td>".$value[3]."</td>";
+                echo "<td>".$value[4]."</td>";
+                echo "<td>".$value[5]."</td>";
+
                 echo "</tr>";
               }
             ?>
@@ -221,7 +227,7 @@ for ($i=0; $i <count($optimasi) ; $i++) {
               foreach ($optimal as $key => $value) {
                 echo "<tr>";
                 echo "<td>".$alternatif[$key][0]."</td>";
-              for ($i=1; $i <= count($value) ; $i++) {
+              for ($i=1; $i < count($value) ; $i++) {
                 echo "<td>".$value[$i]."</td>";
                 }
                 echo "</tr>";
@@ -293,15 +299,20 @@ for ($i=0; $i <count($optimasi) ; $i++) {
             </tr>
           </thead>
           <tbody align="center">
-            <?php
-              foreach ($optimasi as $key => $value) {
-                echo "<tr>";
-                echo "<td>".$alternatif[$key][0]."</td>";
-                echo "<td>".$value[3]."</td>";
+          <?php
 
-                echo "</tr>";
-              }
+            $query="SELECT * FROM hasil_akhir ORDER BY nilaiYi DESC";
+            $result=$konek->query($query);
+            $i=1;
+            while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
               ?>
+            <tr>
+            <td ><?php echo $row['namaCalon']; ?></td>
+            <td ><?php echo $row['nilaiYi']; ?></td>
+            <td ><?php echo $i ?></td>
+            </tr>
+          <?php $i++; } ?>
+
           </tbody>
         </table>
       </div>
