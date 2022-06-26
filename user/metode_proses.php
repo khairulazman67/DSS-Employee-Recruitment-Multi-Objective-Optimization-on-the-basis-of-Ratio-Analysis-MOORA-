@@ -57,72 +57,53 @@
 
 <?php
 if (isset($_POST['proses'])) { 
-  $sql = 'SELECT * FROM kriteriaIPK';
-  $result = $konek->query($sql);
-  //-- menyiapkan variable penampung berupa array
-  $kriteriaIPK=array();
-  //-- melakukan iterasi pengisian array untuk tiap record data yang didapat
-  foreach ($result as $row) {
-      $kriteriaIPK[$row['id']]=array($row['IPK'],$row['bilanganfuzzy'],$row['nilai']);
-  };
-  $outIPK =0;
-  $nilai =3;
-  $outnilai = 0.00;
-    if($nilai<=floatval($kriteriaIPK[5][0])){
-      $outnilai= floatval($kriteriaIPK[5][2]);
+  function IPK($nilaiIPK){
+    $outnilai = 0.00;
+
+    if($nilaiIPK<2 || $nilaiIPK >4){
+      $outnilai = 20;
     }
-    elseif($nilai>=floatval($kriteriaIPK[5][0]) and $nilai<=floatval($kriteriaIPK[4][0])){
-      $outnilai = floatval($kriteriaIPK[4][2]);
+    elseif($nilaiIPK>= 2 && $nilaiIPK<=2.7){
+      $outnilai = 50;
     }
-    elseif($nilai>=floatval($kriteriaIPK[4][0]) and $nilai<=floatval($kriteriaIPK[3][0])){
-      $outnilai = floatval($kriteriaIPK[3][2]);
+    elseif($nilaiIPK>=2.7 && $nilaiIPK<= 3){
+      $outnilai = 70;
     }
-    elseif($nilai>=floatval($kriteriaIPK[3][0]) and $nilai<=floatval($kriteriaIPK[2][0])){
-      $outnilai = floatval($kriteriaIPK[2][2]);
+    elseif($nilaiIPK>3 && $nilaiIPK<=3.25){
+      $outnilai = 80;
     }
-    elseif($nilai>=floatval($kriteriaIPK[2][0]) and $nilai<=floatval($kriteriaIPK[1][0])){
-      $outnilai = floatval($kriteriaIPK[1][2]);
-    }
-    elseif($nilai>=floatval($kriteriaIPK[1][0]) and $nilai<=4.0){
-      $outnilai = floatval($kriteriaIPK[1][2]);
+    elseif($nilaiIPK>=3.5 && $nilaiIPK<=4){
+      $outnilai = 100;
     }else{
-      $outnilai =10;
+      $outnilai =0;
     }
 
+    return $outnilai;
+  };
   // var_dump($outnilai);
 
-
-  $sql = 'SELECT * FROM kriteriaPengalaman';
-  $result = $konek->query($sql);
-  //-- menyiapkan variable penampung berupa array
-  $kriteriaPengalaman=array();
-  //-- melakukan iterasi pengisian array untuk tiap record data yang didapat
-  foreach ($result as $row) {
-    $kriteriaPengalaman[$row['id']]=array($row['lamaKerja'],$row['bilanganfuzzy'],$row['nilai']);
-  }
-
-  $nilaiPel = 7;
-  $outnilaiPel = 0;
-  // print_r($kriteriaPengalaman[5][0]);
-  if($nilaiPel<=floatval($kriteriaPengalaman[5][0])){
-    $outnilaiPel = floatval($kriteriaPengalaman[5][2]);
-  }
-  elseif($nilaiPel>floatval($kriteriaPengalaman[5][0]) && $nilaiPel<=floatval($kriteriaPengalaman[4][0])){
-    $outnilaiPel = floatval($kriteriaPengalaman[4][2]);
-  }
-  elseif($nilaiPel>floatval($kriteriaPengalaman[4][0]) && $nilaiPel<=floatval($kriteriaPengalaman[3][0])){
-    $outnilaiPel = floatval($kriteriaPengalaman[3][2]);
-  }
-  elseif($nilaiPel>floatval($kriteriaPengalaman[3][0]) && $nilaiPel<=floatval($kriteriaPengalaman[2][0])){
-    $outnilaiPel = floatval($kriteriaPengalaman[2][2]);
-  }
-  elseif($nilaiPel>=floatval($kriteriaPengalaman[2][0]) && $nilaiPel<=floatval($kriteriaPengalaman[1][0])){
-    $outnilaiPel = floatval($kriteriaPengalaman[2][2]);
-  }
-  elseif($nilaiPel>=floatval($kriteriaPengalaman[1][0])){
-    $outnilaiPel = floatval($kriteriaPengalaman[1][2]);
-  }else{
-    $outnilaiPel =0;
+  function pengalaman($nilaiPel){
+    $nilaiPel = 7;
+    $outnilai = 0;
+    // print_r($kriteriaPengalaman[5][0]);
+    if($nilaiPel<=0){
+      $outnilai = 10;
+    }
+    elseif($nilaiPel> 0 && $nilaiPel<= 2){
+      $outnilai = 40;
+    }
+    elseif($nilaiPel> 2 && $nilaiPel<= 3){
+      $outnilai = 60;
+    }
+    elseif($nilaiPel> 3 && $nilaiPel<= 4){
+      $outnilai = 80;
+    }
+    elseif($nilaiPel> 4 ){
+      $outnilai = 100;
+    }else{
+      $outnilai =0;
+    }
+    return $outnilai;
   }
   // print_r($outnilaiPel);
 
@@ -193,7 +174,51 @@ if (isset($_POST['proses'])) {
     }
     return $outnilaiPsikotes;
   }
-  print_r(psikotest(100));
+  print_r('Psikotest '.psikotest(100).'<br>');
+  print_r('Wawancara '.wawancara(40).'<br>');
+  print_r('Pengalaman '.pengalaman(60).'<br>');
+  print_r('Umur '.umur(100).'<br>');
+  print_r('IPK '.IPK(4).'<br>');
+
+  
+
+  $sql    = "SELECT * FROM data_calon_karyawan";
+  $result = $konek->query($sql);
+  $no     = 1;
+
+  $data_post = [];
+  while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+    $data_post[] = array(
+      'id_alternatif'   => $row['id'],
+      'id_calon'        => $row['id'],
+      'alternatif'      => $row['namacalon'],
+      'IPK'             => $row['IPK'],
+      'umur'            => $row['umur'],
+      'pengalamanKerja' => $row['pengalamanKerja'],
+      'nilaiPsikotest'  => $row['nilaiPsikotest'],
+      'nilaiWawancara'  => $row['nilaiWawancara']
+    );
+  }
+
+  $query_k = $konek->query('SELECT * FROM moo_kriteria');
+  $id_kriteria = [];
+  while ($row_k = $query_k->fetch_array(MYSQLI_ASSOC)) {
+    $id_kriteria[] = $row_k['id'];
+  }
+
+  foreach ($data_post as $key => $value) {
+
+
+  }
+
+  $sql = 'SELECT * FROM data_calon_karyawan';
+  $result = $konek->query($sql);
+  //-- menyiapkan variable penampung berupa array
+  $kriteria=array();
+  //-- melakukan iterasi pengisian array untuk tiap record data yang didapat
+  foreach ($result as $row) {
+      $kriteria[$row['id']]=array($row['namacalon'],$row['kriteria'],$row['type'],$row['bobot']);
+  }
 
 } else if (isset($_POST['kosongkan'])) {
 
