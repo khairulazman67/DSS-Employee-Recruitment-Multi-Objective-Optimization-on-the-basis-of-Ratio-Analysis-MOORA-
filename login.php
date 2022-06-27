@@ -34,7 +34,7 @@ if (isset($_POST['masuk'])) {
   <meta name="author" content="">
 
   <title>Login | Admin</title>
-  
+
   <link href="assets/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
   <link href="assets/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -44,8 +44,17 @@ if (isset($_POST['masuk'])) {
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 </head>
-
-<body class="bg-gradient-primary">
+<style>
+  .buttonGreen{
+    background-color: #0F996E;
+    color:white;
+  }
+  .buttonGreen:hover{
+    background-color: green;
+    color:white;
+  }
+</style>
+<body style="background-color: #92A323;">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-xl-6 col-lg-12 col-md-9">
@@ -75,9 +84,9 @@ if (isset($_POST['masuk'])) {
                       <input type="password" name="password" class="form-control form-control-user" placeholder="Password" required="required" />
                     </div>
                     <div class="form-group">
-                      <input type="submit" class="btn btn-primary btn-user btn-block" name="masuk" value="Masuk">
+                      <input type="submit" class="btn buttonGreen btn-user btn-block" name="masuk" value="Masuk">
                     </div>
-                    <a href="index.php" class="btn btn-primary btn-user btn-block">
+                    <a href="index.php" class="btn buttonGreen btn-user btn-block">
                       Batal
                     </a>
                 </div>

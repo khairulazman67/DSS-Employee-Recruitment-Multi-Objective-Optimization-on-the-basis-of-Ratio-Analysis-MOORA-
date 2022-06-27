@@ -1,5 +1,17 @@
 <?php include_once 'atribut/head.php'; ?>
-
+<style>
+  .buttonGreen{
+      background-color: #0F996E;
+      color:white;
+  };
+  .buttonGreen:hover{
+      background-color: green;
+      color:white;
+  };
+  .textGreen{
+    color : #92A323
+  }
+</style>
 <!-- Page Wrapper -->
 <div id="wrapper">
   <!-- begin:: siderbar -->
@@ -20,7 +32,7 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-lg-6 col-xl-6">
-                    <h5 class="mt-2 font-weight-bold text-info"> <b> Bilangan Fuzzy Tiap Kriteria </b></h5>
+                    <h5 class="mt-2 font-weight-bold textGreen"> <b> Bilangan Fuzzy Tiap Kriteria </b></h5>
                   </div>
                 </div>
               </div>
@@ -52,7 +64,7 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-lg-6 col-xl-6">
-                    <h5 class="mt-2 font-weight-bold text-info"> <b> Jenis Dan Bobot Kriteria </b></h5>
+                    <h5 class="mt-2 font-weight-bold textGreen"> <b> Jenis Dan Bobot Kriteria </b></h5>
                   </div>
                 </div>
               </div>
@@ -67,7 +79,7 @@
                   <tbody>
                     <?php
 
-                      $query="SELECT * FROM moo_kriteria";
+                      $query="SELECT * FROM data_kriteria";
                       $result=$konek->query($query);
 
                       while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
@@ -89,11 +101,11 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-lg-6 col-xl-6">
-                    <h5 class="mt-2 font-weight-bold text-info"> <b> Nilai Untuk Kriteria IPK </b></h5>
+                    <h5 class="mt-2 font-weight-bold textGreen"> <b> Nilai Untuk Kriteria IPK </b></h5>
                   </div>
-                  <div class="col-lg-6 col-xl-6" style="text-align: right;">
-                    <a class="btn btn-info" href="data_kriteria_IPK_tambah.php">Tambah</a>
-                  </div>
+                  <!-- <div class="col-lg-6 col-xl-6" style="text-align: right;">
+                    <a class="btn buttonGreen" href="data_kriteria_IPK_tambah.php">Tambah</a>
+                  </div> -->
                 </div>
               </div>
               <div class="card-body">
@@ -116,16 +128,16 @@
                       <td align="center"><?php echo $row['bilanganfuzzy']; ?></td>
                       <td align="center"><?php echo $row['nilai']; ?></td>
                       <td align="center">
-                        <a class="btn btn-info btn-sm" href="data_kriteria_IPK_ubah.php?id=<?php echo $row['id'] ?>">
+                        <a class="btn buttonGreen btn-sm" href="data_kriteria_IPK_ubah.php?id=<?php echo $row['id'] ?>">
                           <span class="icon text-white">
                             <i class="fas fa-edit"></i>
                           </span>
                         </a>
-                        <a class="btn btn-danger btn-sm" href="data_kriteria_IPK_hapus.php?id=<?php echo $row['id'] ?>">
+                        <!-- <a class="btn btn-danger btn-sm" href="data_kriteria_IPK_hapus.php?id=<?php echo $row['id'] ?>">
                           <span class="icon text-white">
                             <i class="fas fa-trash"></i>
                           </span>
-                        </a>
+                        </a> -->
                       </td>
                     </tr>
                     <?php } ?>
@@ -139,7 +151,7 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-lg-6 col-xl-6">
-                    <h5 class="mt-2 font-weight-bold text-info"> <b> Nilai Untuk Kriteria Umur </b></h5>
+                    <h5 class="mt-2 font-weight-bold textGreen"> <b> Nilai Untuk Kriteria Umur </b></h5>
                   </div>
                 </div>
               </div>
@@ -176,11 +188,11 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-lg-6 col-xl-6">
-                    <h5 class="mt-2 font-weight-bold text-info"> <b> Nilai Untuk Kriteria Pengalaman Kerja </b></h5>
+                    <h5 class="mt-2 font-weight-bold textGreen"> <b> Nilai Untuk Kriteria Pengalaman Kerja </b></h5>
                   </div>
-                  <div class="col-lg-6 col-xl-6" style="text-align: right;">
-                    <a class="btn btn-info" href="data_kriteria_pengalaman_tambah.php">Tambah</a>
-                  </div>
+                  <!-- <div class="col-lg-6 col-xl-6" style="text-align: right;">
+                    <a class="btn buttonGreen" href="data_kriteria_pengalaman_tambah.php">Tambah</a>
+                  </div> -->
                 </div>
               </div>
               <div class="card-body">
@@ -203,16 +215,16 @@
                       <td align="center"><?php echo $row['bilanganfuzzy']; ?></td>
                       <td align="center"><?php echo $row['nilai']; ?></td>
                       <td align="center">
-                        <a class="btn btn-info btn-sm" href="data_kriteria_pengalaman_ubah.php?id=<?php echo $row['id'] ?>">
+                        <a class="btn buttonGreen btn-sm" href="data_kriteria_pengalaman_ubah.php?id=<?php echo $row['id'] ?>">
                           <span class="icon text-white">
                             <i class="fas fa-edit"></i>
                           </span>
                         </a>
-                        <a class="btn btn-danger btn-sm" href="data_kriteria_pengalaman_hapus.php?id=<?php echo $row['id'] ?>">
+                        <!-- <a class="btn btn-danger btn-sm" href="data_kriteria_pengalaman_hapus.php?id=<?php echo $row['id'] ?>">
                           <span class="icon text-white">
                             <i class="fas fa-trash"></i>
                           </span>
-                        </a>
+                        </a> -->
                       </td>
                     </tr>
                     <?php } ?>
@@ -226,11 +238,11 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-lg-6 col-xl-6">
-                    <h5 class="mt-2 font-weight-bold text-info"> <b> Nilai Untuk Kriteria Nilai Psikotes</b></h5>
+                    <h5 class="mt-2 font-weight-bold textGreen"> <b> Nilai Untuk Kriteria Nilai Psikotes</b></h5>
                   </div>
-                  <div class="col-lg-6 col-xl-6" style="text-align: right;">
-                    <a class="btn btn-info" href="data_kriteria_psikotest_tambah.php">Tambah</a>
-                  </div>
+                  <!-- <div class="col-lg-6 col-xl-6" style="text-align: right;">
+                    <a class="btn buttonGreen" href="data_kriteria_psikotest_tambah.php">Tambah</a>
+                  </div> -->
                 </div>
               </div>
               <div class="card-body">
@@ -254,16 +266,16 @@
                           <td align="center"><?php echo $row['bilanganfuzzy']; ?></td>
                           <td align="center"><?php echo $row['nilai']; ?></td>
                           <td align="center">
-                            <a class="btn btn-info btn-sm" href="data_kriteria_psikotest_ubah.php?id=<?php echo $row['id'] ?>">
+                            <a class="btn buttonGreen btn-sm" href="data_kriteria_psikotest_ubah.php?id=<?php echo $row['id'] ?>">
                               <span class="icon text-white">
                                 <i class="fas fa-edit"></i>
                               </span>
                             </a>
-                            <a class="btn btn-danger btn-sm" href="data_kriteria_psikotest_hapus.php?id=<?php echo $row['id'] ?>">
+                            <!-- <a class="btn btn-danger btn-sm" href="data_kriteria_psikotest_hapus.php?id=<?php echo $row['id'] ?>">
                               <span class="icon text-white">
                                 <i class="fas fa-trash"></i>
                               </span>
-                            </a>
+                            </a> -->
                           </td>
                         </tr>
                       <?php } ?>
@@ -277,11 +289,11 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-lg-6 col-xl-6">
-                    <h5 class="mt-2 font-weight-bold text-info"> <b> Nilai Untuk Kriteria Nilai Wawancara </b></h5>
+                    <h5 class="mt-2 font-weight-bold textGreen"> <b> Nilai Untuk Kriteria Nilai Wawancara </b></h5>
                   </div>
-                  <div class="col-lg-6 col-xl-6" style="text-align: right;">
-                    <a class="btn btn-info" href="data_kriteria_wawancara_tambah.php">Tambah</a>
-                  </div>
+                  <!-- <div class="col-lg-6 col-xl-6" style="text-align: right;">
+                    <a class="btn buttonGreen" href="data_kriteria_wawancara_tambah.php">Tambah</a>
+                  </div> -->
                 </div>
               </div>
               <div class="card-body">
@@ -307,16 +319,16 @@
                       <td align="center"><?php echo $row['bilanganfuzzy']; ?></td>
                       <td align="center"><?php echo $row['nilai']; ?></td>
                       <td align="center">
-                        <a class="btn btn-info btn-sm" href="data_kriteria_wawancara_ubah.php?id=<?php echo $row['id'] ?>">
+                        <a class="btn buttonGreen btn-sm" href="data_kriteria_wawancara_ubah.php?id=<?php echo $row['id'] ?>">
                           <span class="icon text-white">
                             <i class="fas fa-edit"></i>
                           </span>
                         </a>
-                        <a class="btn btn-danger btn-sm" href="data_kriteria_wawancara_hapus.php?id=<?php echo $row['id'] ?>">
+                        <!-- <a class="btn btn-danger btn-sm" href="data_kriteria_wawancara_hapus.php?id=<?php echo $row['id'] ?>">
                           <span class="icon text-white">
                             <i class="fas fa-trash"></i>
                           </span>
-                        </a>
+                        </a> -->
                       </td>
                     </tr>
                     <?php } ?>

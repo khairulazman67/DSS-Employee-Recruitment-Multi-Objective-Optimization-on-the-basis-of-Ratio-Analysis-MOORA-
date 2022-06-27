@@ -1,5 +1,9 @@
 <?php include_once 'atribut/head.php'; ?>
-
+<style>
+    .textGreen{
+      color:#92A323
+    }
+  </style>
 <!-- Page Wrapper -->
 <div id="wrapper">
   <!-- begin:: siderbar -->
@@ -20,13 +24,13 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-lg-6 col-xl-6">
-                    <h5 class="mt-2 font-weight-bold text-info"> <b> Dashboard </b></h5>
+                    <h5 class="mt-2 font-weight-bold textGreen"> <b> Dashboard </b></h5>
                   </div>
                 </div>
               </div>
-              <div class="card-body">
+              <div class="card-body"><b>
                 Selamat Datang Dalam Sistem pendukung keputusan penerimaan karyawan baru Perumda Tirta Pase Menggunakan Metode Multi Objective Optimization On The Basis Of Radio Analysus (MOORA)
-Akses Sistem
+Akses Sistem </b>
 
               </div>
             </div>
@@ -40,15 +44,7 @@ Akses Sistem
 </div>
 <!-- End of Page Content -->
 
-<!-- Footer -->
-<footer class="sticky-footer bg-white">
-  <div class="container my-auto">
-    <div class="copyright text-center my-auto">
-      <span>Copyright &copy; 2019 Marcelino Derry Utomo</span>
-    </div>
-  </div>
-</footer>
-<!-- End of Footer -->
+
 
 </div>
 <!-- End of Content Wrapper -->

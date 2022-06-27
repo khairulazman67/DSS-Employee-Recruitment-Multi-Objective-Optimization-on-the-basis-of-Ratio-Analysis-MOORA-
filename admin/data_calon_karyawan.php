@@ -1,5 +1,17 @@
 <?php include_once 'atribut/head.php'; ?>
-
+<style>
+  .buttonGreen{
+      background-color: #0F996E;
+      color:white;
+  };
+  .buttonGreen:hover{
+      background-color: green;
+      color:white;
+  };
+  .textGreen{
+    color : #92A323
+  }
+</style>
 <!-- Page Wrapper -->
 <div id="wrapper">
   <!-- begin:: siderbar -->
@@ -20,10 +32,10 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-lg-6 col-xl-6">
-                    <h5 class="mt-2 font-weight-bold text-info"> <b> Data Calon Karyawan </b></h5>
+                    <h5 class="mt-2 font-weight-bold" style="color : #92A323"> <b> Data Calon Karyawan </b></h5>
                   </div>
                   <div class="col-lg-6 col-xl-6" style="text-align: right;">
-                    <a class="btn btn-info" href="data_calon_karyawan_tambah.php">Tambah Data Calon Karyawan</a>
+                    <a class="btn buttonGreen" href="data_calon_karyawan_tambah.php">Tambah Data Calon Karyawan</a>
                   </div>
                 </div>
               </div>
@@ -54,7 +66,7 @@
                         <td align="center"><?php echo $row['nilaiWawancara']; ?></td>
 
                         <td align="center">
-                          <a class="btn btn-info btn-icon-split"
+                          <a class="btn buttonGreen btn-icon-split"
                             href="data_calon_karyawan_ubah.php?id=<?php echo $row['id'] ?>">
                             <span class="icon text-white">
                               <i class="fas fa-edit"></i>
@@ -82,16 +94,6 @@
   </div>
 </div>
 <!-- End of Page Content -->
-
-<!-- Footer -->
-<footer class="sticky-footer bg-white">
-  <div class="container my-auto">
-    <div class="copyright text-center my-auto">
-      <span>Copyright &copy; 2019 Marcelino Derry Utomo</span>
-    </div>
-  </div>
-</footer>
-<!-- End of Footer -->
 
 </div>
 <!-- End of Content Wrapper -->

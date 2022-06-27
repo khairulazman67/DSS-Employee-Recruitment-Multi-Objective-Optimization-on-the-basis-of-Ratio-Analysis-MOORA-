@@ -1,5 +1,9 @@
 <?php include_once 'atribut/head.php'; ?>
-
+<style>
+  .textGreen{
+    color:#92A323
+  }
+</style>
 <!-- Page Wrapper -->
 <div id="wrapper">
   <!-- begin:: siderbar -->
@@ -20,7 +24,7 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-lg-6 col-xl-6">
-                    <h5 class="mt-2 font-weight-bold text-info"> <b> Bilangan Fuzzy Tiap Kriteria </b></h5>
+                    <h5 class="mt-2 font-weight-bold textGreen"> <b> Bilangan Fuzzy Tiap Kriteria </b></h5>
                   </div>
                 </div>
               </div>
@@ -52,7 +56,7 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-lg-6 col-xl-6">
-                    <h5 class="mt-2 font-weight-bold text-info"> <b> Jenis Dan Bobot Kriteria </b></h5>
+                    <h5 class="mt-2 font-weight-bold textGreen"> <b> Jenis Dan Bobot Kriteria </b></h5>
                   </div>
                 </div>
               </div>
@@ -89,7 +93,7 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-lg-6 col-xl-6">
-                    <h5 class="mt-2 font-weight-bold text-info"> <b> Nilai Untuk Kriteria IPK </b></h5>
+                    <h5 class="mt-2 font-weight-bold textGreen"> <b> Nilai Untuk Kriteria IPK </b></h5>
                   </div>
                 </div>
               </div>
@@ -123,7 +127,7 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-lg-6 col-xl-6">
-                    <h5 class="mt-2 font-weight-bold text-info"> <b> Nilai Untuk Kriteria Umur </b></h5>
+                    <h5 class="mt-2 font-weight-bold textGreen"> <b> Nilai Untuk Kriteria Umur </b></h5>
                   </div>
                 </div>
               </div>
@@ -160,7 +164,7 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-lg-6 col-xl-6">
-                    <h5 class="mt-2 font-weight-bold text-info"> <b> Nilai Untuk Kriteria Pengalaman Kerja </b></h5>
+                    <h5 class="mt-2 font-weight-bold textGreen"> <b> Nilai Untuk Kriteria Pengalaman Kerja </b></h5>
                   </div>
                 </div>
               </div>
@@ -194,7 +198,7 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-lg-6 col-xl-6">
-                    <h5 class="mt-2 font-weight-bold text-info"> <b> Nilai Untuk Kriteria Nilai Psikotes</b></h5>
+                    <h5 class="mt-2 font-weight-bold textGreen"> <b> Nilai Untuk Kriteria Nilai Psikotes</b></h5>
                   </div>
                 </div>
               </div>
@@ -229,7 +233,7 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-lg-6 col-xl-6">
-                    <h5 class="mt-2 font-weight-bold text-info"> <b> Nilai Untuk Kriteria Nilai Wawancara </b></h5>
+                    <h5 class="mt-2 font-weight-bold textGreen"> <b> Nilai Untuk Kriteria Nilai Wawancara </b></h5>
                   </div>
                 </div>
               </div>

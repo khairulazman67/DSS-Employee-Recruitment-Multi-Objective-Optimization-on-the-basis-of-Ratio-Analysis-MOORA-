@@ -121,7 +121,7 @@ foreach ($optimasi as $key => $value) {
       <div class="card-header">
         <div class="row">
           <div class="col-lg-6 col-xl-6">
-            <h5 class="mt-2 font-weight-bold text-info"> <b> Pengambilan Nilai Alternatif </b></h5>
+            <h5 class="mt-2 font-weight-bold" style="Color: #92A323;"> <b> Pengambilan Nilai Alternatif </b></h5>
           </div>
         </div>
       </div>
@@ -163,7 +163,7 @@ foreach ($optimasi as $key => $value) {
       <div class="card-header">
         <div class="row">
           <div class="col-lg-6 col-xl-6">
-            <h5 class="mt-2 font-weight-bold text-info"> <b> Membuat Matriks Normalisasi </b></h5>
+            <h5 class="mt-2 font-weight-bold" style="Color: #92A323;"> <b> Membuat Matriks Normalisasi </b></h5>
           </div>
         </div>
       </div>
@@ -206,7 +206,7 @@ foreach ($optimasi as $key => $value) {
       <div class="card-header">
         <div class="row">
           <div class="col-lg-6 col-xl-6">
-            <h5 class="mt-2 font-weight-bold text-info"> <b> Optimalisasi Bobot </b></h5>
+            <h5 class="mt-2 font-weight-bold" style="Color: #92A323;"> <b> Optimalisasi Bobot </b></h5>
           </div>
         </div>
       </div>
@@ -247,7 +247,7 @@ foreach ($optimasi as $key => $value) {
       <div class="card-header">
         <div class="row">
           <div class="col-lg-6 col-xl-6">
-            <h5 class="mt-2 font-weight-bold text-info"> <b> Menghitung Nilai Optimasi </b></h5>
+            <h5 class="mt-2 font-weight-bold" style="Color: #92A323;"> <b> Menghitung Nilai Optimasi </b></h5>
           </div>
         </div>
       </div>
@@ -285,7 +285,7 @@ foreach ($optimasi as $key => $value) {
       <div class="card-header">
         <div class="row">
           <div class="col-lg-6 col-xl-6">
-            <h5 class="mt-2 font-weight-bold text-info"> <b> Hasil Rekomendasi </b></h5>
+            <h5 class="mt-2 font-weight-bold" style="Color: #92A323;"> <b> Hasil Rekomendasi </b></h5>
           </div>
         </div>
       </div>

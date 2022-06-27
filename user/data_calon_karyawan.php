@@ -5,7 +5,11 @@
   <!-- begin:: siderbar -->
   <?php include_once 'atribut/sidebar.php'; ?>
   <!-- end:: siderbar -->
-
+  <style>
+    .textGreen{
+      color:#92A323
+    }
+  </style>
   <div id="content-wrapper" class="d-flex flex-column">
     <!-- begin:: main content -->
     <div id="content">
@@ -20,7 +24,7 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-lg-6 col-xl-6">
-                    <h5 class="mt-2 font-weight-bold text-info"> <b> Data Alat Mining </b></h5>
+                    <h5 class="mt-2 font-weight-bold textGreen"> <b> Data Alat Mining </b></h5>
                   </div>
                 </div>
               </div>
@@ -65,15 +69,7 @@
 </div>
 <!-- End of Page Content -->
 
-<!-- Footer -->
-<footer class="sticky-footer bg-white">
-  <div class="container my-auto">
-    <div class="copyright text-center my-auto">
-      <span>Copyright &copy; 2019 Marcelino Derry Utomo</span>
-    </div>
-  </div>
-</footer>
-<!-- End of Footer -->
+
 
 </div>
 <!-- End of Content Wrapper -->

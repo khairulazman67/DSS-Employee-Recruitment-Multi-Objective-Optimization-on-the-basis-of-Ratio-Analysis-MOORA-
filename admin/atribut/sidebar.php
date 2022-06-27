@@ -1,8 +1,7 @@
-<ul class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav  sidebar sidebar-dark accordion"  style="background-color: #0F996E;" id="accordionSidebar">
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
     <div class="sidebar-brand-icon">
-      <i class="fa fa-btc fa-spin" style="font-size:30px"></i>
-      <i class="fa fa-gavel" style="font-size:50px"></i>
+      <h4><b>Admin</b></h4>
     </div>
   </a>
   <hr class="sidebar-divider my-0">

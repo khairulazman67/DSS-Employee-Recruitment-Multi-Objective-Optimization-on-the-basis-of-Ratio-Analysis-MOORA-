@@ -12,12 +12,11 @@ $row       = mysqli_fetch_array($query);
   <!-- begin:: siderbar -->
   <?php include_once 'atribut/sidebar.php'; ?>
   <!-- end:: siderbar -->
-  
+
   <!-- Content Wrapper -->
   <div id="content-wrapper" class="d-flex flex-column">
     <!-- Main Content -->
     <div id="content">
-      
       <?php include_once 'atribut/navbar.php'; ?>
 
       <!-- Begin Page Content -->
@@ -26,7 +25,7 @@ $row       = mysqli_fetch_array($query);
         <div class="col-xl-12  col-lg-8">
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h5 class="m-0 font-weight-bold text-info"> <b> Ubah Data Kriteria Umur </b></h5>
+              <h5 class="m-0 font-weight-bold"> <b> Ubah Data Kriteria Umur </b></h5>
             </div>
             <div class="card-body">
               <form class="form" method="post">
@@ -70,15 +69,7 @@ $row       = mysqli_fetch_array($query);
   </div>
 </div>
 <!-- End of Page Content -->
-<!-- Footer -->
-<footer class="sticky-footer bg-white">
-  <div class="container my-auto">
-    <div class="copyright text-center my-auto">
-      <span>Copyright &copy; 2019 Marcelino Derry Utomo</span>
-    </div>
-  </div>
-</footer>
-<!-- End of Footer -->
+
 
 </div>
 <!-- End of Content Wrapper -->

@@ -11,7 +11,16 @@
     <div id="content">
 
       <?php include_once 'atribut/navbar.php'; ?>
-
+      <style>
+        .buttonGreen{
+          background-color: #0F996E;
+          color:white;
+        }
+        .buttonGreen:hover{
+          background-color: green;
+          color:white;
+        }
+      </style>
       <!-- begin:: content -->
       <div class="container-fluid">
         <div class="row">
@@ -20,12 +29,12 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-lg-6 col-xl-6">
-                    <h5 class="mt-2 font-weight-bold text-info"> <b> Proses Moora </b></h5>
+                    <h5 class="mt-2 font-weight-bold" style="Color: #0F996E;"> <b> Proses Moora </b></h5>
                   </div>
                   <div class="col-lg-6 col-xl-6" style="text-align: right;">
                     <form method="post">
                       <input type="submit" name="kosongkan" value="Kosongkan" class="btn btn-danger">
-                      <button type="submit" name="proses" value="Proses"  class="btn btn-info"> Hitung Moora</button>
+                      <button type="submit" name="proses" value="Proses"  class="btn buttonGreen"> Hitung Moora</button>
                     </form>
                   </div>
                 </div>
@@ -74,30 +83,67 @@ if (isset($_POST['proses'])) {
       'nilaiWawancara'  => $row['nilaiWawancara']
     );
   }
+  $query="SELECT * FROM kriteriaIPK";
+  $result=$konek->query($query);
+  while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
+    $dataIPK[] = array(
+      'id'   => $row['id'],
+      'IPK'        => $row['IPK'],
+      'bilanganfuzzy'      => $row['bilanganfuzzy'],
+      'nilai'             => $row['nilai'],
+    );
+  };
 
-  $query_k = $konek->query('SELECT * FROM data_kriteria');
-  $id_kriteria = [];
-  while ($row_k = $query_k->fetch_array(MYSQLI_ASSOC)) {
-    $id_kriteria[] = $row_k['id'];
-  }
+  $query="SELECT * FROM kriteriaPengalaman";
+  $result=$konek->query($query);
+  while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
+    $dataPengalaman[] = array(
+      'id'   => $row['id'],
+      'lamaKerja'        => $row['lamaKerja'],
+      'bilanganfuzzy'      => $row['bilanganfuzzy'],
+      'nilai'             => $row['nilai'],
+    );
+  };
+
+  $query="SELECT * FROM kriteriaPsikotest";
+  $result=$konek->query($query);
+  while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
+    $dataPsikotest[] = array(
+      'id'   => $row['id'],
+      'jumlahNilai'        => $row['jumlahNilai'],
+      'bilanganfuzzy'      => $row['bilanganfuzzy'],
+      'nilai'             => $row['nilai'],
+    );
+  };
+
+  $query="SELECT * FROM kriteriaWawancara";
+  $result=$konek->query($query);
+  while ($row=$result->fetch_array(MYSQLI_ASSOC)) {
+    $dataWawancara[] = array(
+      'id'   => $row['id'],
+      'jumlahNilai'        => $row['jumlahNilai'],
+      'bilanganfuzzy'      => $row['bilanganfuzzy'],
+      'nilai'             => $row['nilai'],
+    );
+  };
 
   foreach ($data_post as $key => $value) {
-
+    // return ;
     //Cek IPK
-    if($value['IPK']<2 || $value['IPK'] >4){
-      $outIPK = 20;
+    if($value['IPK']<floatval($dataIPK[4]['IPK']) || $value['IPK'] >4){
+      $outIPK = floatval($dataIPK[4]['nilai']);
     }
-    elseif($value['IPK'] >= 2 && $value['IPK']<2.7){
-      $outIPK = 50;
+    elseif($value['IPK'] >= floatval($dataIPK[4]['IPK']) && $value['IPK']<floatval($dataIPK[3]['IPK'])){
+      $outIPK = floatval($dataIPK[3]['nilai']);
     }
-    elseif($value['IPK']>=2.7 && $value['IPK']< 3){
-      $outIPK = 70;
+    elseif($value['IPK']>=floatval($dataIPK[3]['IPK'])&& $value['IPK']< floatval($dataIPK[2]['IPK'])){
+      $outIPK = floatval($dataIPK[2]['nilai']);
     }
-    elseif($value['IPK']>=3 && $value['IPK']<3.25){
-      $outIPK = 80;
+    elseif($value['IPK']>=floatval($dataIPK[2]['IPK']) && $value['IPK']<floatval($dataIPK[1]['IPK'])){
+      $outIPK = floatval($dataIPK[1]['nilai']);
     }
-    elseif($value['IPK']>=3.25 && $value['IPK']<=4){
-      $outIPK = 100;
+    elseif($value['IPK']>=floatval($dataIPK[1]['IPK'])&& $value['IPK']<=4){
+      $outIPK = floatval($dataIPK[0]['nilai']);
     }else{
       $outIPK =0;
     }
@@ -105,19 +151,19 @@ if (isset($_POST['proses'])) {
 
     //Cek Pengalaman
     if($value['pengalamanKerja']<=0){
-      $outPengalaman = 10;
+      $outPengalaman = floatval($dataPengalaman[4]['nilai']);
     }
-    elseif($value['pengalamanKerja']> 0 && $value['pengalamanKerja']<= 2){
-      $outPengalaman = 40;
+    elseif($value['pengalamanKerja']> floatval($dataPengalaman[4]['lamaKerja']) && $value['pengalamanKerja']<= floatval($dataPengalaman[3]['lamaKerja'])){
+      $outPengalaman = floatval($dataPengalaman[3]['nilai']);
     }
-    elseif($value['pengalamanKerja']> 2 && $value['pengalamanKerja']<= 3){
-      $outPengalaman = 60;
+    elseif($value['pengalamanKerja']> floatval($dataPengalaman[3]['lamaKerja']) && $value['pengalamanKerja']<= floatval($dataPengalaman[2]['lamaKerja'])){
+      $outPengalaman = floatval($dataPengalaman[2]['nilai']);
     }
-    elseif($value['pengalamanKerja'] > 3 && $value['pengalamanKerja']<= 4){
-      $outPengalaman = 80;
+    elseif($value['pengalamanKerja'] > floatval($dataPengalaman[2]['lamaKerja']) && $value['pengalamanKerja']<= floatval($dataPengalaman[1]['lamaKerja'])){
+      $outPengalaman = floatval($dataPengalaman[1]['nilai']);
     }
-    elseif($value['pengalamanKerja']> 4 ){
-      $outPengalaman = 100;
+    elseif($value['pengalamanKerja']> floatval($dataPengalaman[1]['lamaKerja']) ){
+      $outPengalaman = floatval($dataPengalaman[0]['nilai']);
     }else{
       $outPengalaman =0;
     }
@@ -143,20 +189,20 @@ if (isset($_POST['proses'])) {
     
 
     //Cek Nilai Psikotest
-    if($value['nilaiPsikotest'] <10 || $value['nilaiPsikotest'] > 100){
-      $outPsikotest= 10;
+    if($value['nilaiPsikotest'] < floatval($dataPsikotest[4]['jumlahNilai'])){
+      $outPsikotest= floatval($dataPsikotest[4]['nilai']);
     }
-    elseif($value['nilaiPsikotest'] >= 10 && $value['nilaiPsikotest'] <= 20){
-      $outPsikotest = 40;
+    elseif($value['nilaiPsikotest'] >= floatval($dataPsikotest[4]['jumlahNilai']) && $value['nilaiPsikotest'] <= floatval($dataPsikotest[3]['jumlahNilai'])){
+      $outPsikotest = floatval($dataPsikotest[3]['nilai']);
     }
-    elseif($value['nilaiPsikotest'] >20 && $value['nilaiPsikotest'] <= 40){
-      $outPsikotest = 80;
+    elseif($value['nilaiPsikotest'] >floatval($dataPsikotest[3]['jumlahNilai']) && $value['nilaiPsikotest'] <= floatval($dataPsikotest[2]['jumlahNilai'])){
+      $outPsikotest = floatval($dataPsikotest[2]['nilai']);
     }
-    elseif($value['nilaiPsikotest'] >40 &&  $value['nilaiPsikotest'] <= 90){
-      $outPsikotest = 60;
+    elseif($value['nilaiPsikotest'] >floatval($dataPsikotest[2]['jumlahNilai']) &&  $value['nilaiPsikotest'] <= floatval($dataPsikotest[1]['jumlahNilai'])){
+      $outPsikotest = floatval($dataPsikotest[1]['nilai']);
     }
-    elseif($value['nilaiPsikotest'] >90 && $value['nilaiPsikotest'] <= 100){
-      $outPsikotest = 100;
+    elseif($value['nilaiPsikotest'] >floatval($dataPsikotest[1]['jumlahNilai']) && $value['nilaiPsikotest'] <= floatval($dataPsikotest[0]['jumlahNilai'])){
+      $outPsikotest = floatval($dataPsikotest[0]['nilai']);
     }
     else{
       $outPsikotest =0;
@@ -164,17 +210,20 @@ if (isset($_POST['proses'])) {
     // print_r('Psikotest '.$outPsikotes.'<br>');
 
     //Cek Nilai Wawancara
-    if($value['nilaiWawancara'] <10 || $value['nilaiWawancara'] > 100){
-      $outWawancara= 10;
+    if($value['nilaiWawancara'] <floatval($dataWawancara[4]['jumlahNilai'])){
+      $outWawancara= floatval($dataWawancara[4]['nilai']);
     }
-    elseif($value['nilaiWawancara'] >= 30 && $value['nilaiWawancara'] <= 60){
-      $outWawancara = 40;
+    elseif($value['nilaiWawancara'] >= floatval($dataWawancara[4]['jumlahNilai']) && $value['nilaiWawancara'] <= floatval($dataWawancara[3]['jumlahNilai'])){
+      $outWawancara = floatval($dataWawancara[3]['nilai']);
     }
-    elseif($value['nilaiWawancara'] >60 && $value['nilaiWawancara'] <= 80){
-      $outWawancara = 80;
+    elseif($value['nilaiWawancara'] >floatval($dataWawancara[3]['jumlahNilai']) && $value['nilaiWawancara'] <= floatval($dataWawancara[2]['jumlahNilai'])){
+      $outWawancara = floatval($dataWawancara[2]['nilai']);
     }
-    elseif($value['nilaiWawancara'] >80 && $value['nilaiWawancara'] <= 100){
-      $outWawancara = 100;
+    elseif($value['nilaiWawancara'] >floatval($dataWawancara[2]['jumlahNilai']) && $value['nilaiWawancara'] <= floatval($dataWawancara[1]['jumlahNilai'])){
+      $outWawancara = floatval($dataWawancara[1]['nilai']);
+    }
+    elseif($value['nilaiWawancara'] >floatval($dataWawancara[1]['jumlahNilai']) && $value['nilaiWawancara'] <= floatval($dataWawancara[0]['jumlahNilai'])){
+      $outWawancara = floatval($dataWawancara[0]['nilai']);
     }else{
       $outWawancara =0;
     }

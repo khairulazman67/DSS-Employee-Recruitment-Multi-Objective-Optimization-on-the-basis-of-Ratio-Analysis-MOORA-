@@ -12,7 +12,19 @@ if ($datkod) {
   $kodeoto = "1";
 }
 ?>
-
+<style>
+  .buttonGreen{
+      background-color: #0F996E;
+      color:white;
+  };
+  .buttonGreen:hover{
+      background-color: green;
+      color:white;
+  };
+  .textGreen{
+    color : #92A323
+  }
+</style>
 <!-- Page Wrapper -->
 <div id="wrapper">
   <!-- begin:: siderbar -->
@@ -32,7 +44,7 @@ if ($datkod) {
         <div class="col-xl-12  col-lg-8">
           <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h5 class="m-0 font-weight-bold text-info"> <b> Tambah Data Karyawan </b></h5>
+              <h5 class="m-0 font-weight-bold " style="color : #92A323"> <b> Tambah Data Karyawan </b></h5>
             </div>
             <div class="card-body">
               <form class="form" method="post" name="converter">
@@ -78,7 +90,7 @@ if ($datkod) {
                     <input class="form-control" type="number" name="nilaiWawancara" required>
                   </div>
                 </div>
-                <input class="btn btn-success" type="submit" name="simpan" value="Simpan">
+                <input class="btn buttonGreen" type="submit" name="simpan" value="Simpan">
                 <a href="data_calon_karyawan.php" class="btn btn-danger">Batal</a>
               </form>
             </div>
